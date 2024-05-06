@@ -1,0 +1,45 @@
+<% layout('../layout/boilerplate') -%>
+
+<% for(let order of allOrder) { %>
+    <% let user =  order.author %>
+    <h6><%=user.name%></h6>
+    <h6><%=user.address%>, <%=user.distance%>km</h6>
+
+    <table class="table table-primary" >
+        <thead class="thead-primary">
+            <tr>
+                <th>Item</th>
+                <th>Price</th>
+                <th>Quantity (Kg)</th>
+                <th>Rate</th>
+            </tr>
+        </thead>
+        <tbody>
+            <% let sum = 0; %>
+            <% let weight = 0; %>
+            <% for (let orderItem of order.items) { %>
+                <tr>
+                    <td><%= orderItem.item.title %></td>
+                    <td><%= orderItem.item.price.toLocaleString("en-In") %>/Kg</td>
+                    <td><%= orderItem.item.quantity.toLocaleString("en-In") %></td>
+                    <td><%= (orderItem.item.quantity * orderItem.item.price).toLocaleString("en-In") %></td>
+                </tr>
+                <% sum += orderItem.item.quantity * orderItem.item.price; %>
+                <% weight += parseInt(orderItem.item.quantity); %>
+            <% } %>
+            <tr>
+                <td><b>Transport Charge</b></td>
+                <td></td>
+                <td></td>
+                <td><b><%= ((user.distance * 2).toFixed(2)).toLocaleString("en-In") %></b></td>
+            </tr>
+            <tr>
+                <td><b>Total</b></td>
+                <td></td>
+                <td><b><%= (weight).toLocaleString("en-In") %></b></td>
+                <td><b><%= ((sum + user.distance * 2)).toFixed(2).toLocaleString("en-In") %></b></td>
+            </tr>
+        </tbody>
+    </table>
+    <br>
+<% } %>

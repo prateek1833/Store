@@ -1,8 +1,8 @@
 const mongoose=require("mongoose");
 const initData=require("./data.js");
-const Listing=require("../models/listing.js");
+const Item=require("../models/item.js");
 
-const mongo_url = "mongodb://127.0.0.1:27017/wonderlust";
+const mongo_url = "mongodb://127.0.0.1:27017/Store";
 
 main()
     .then(() => {
@@ -16,8 +16,9 @@ async function main() {
 }
 
 const initDB=async()=>{
-    await Listing.deleteMany({});
-    await Listing.insertMany(initData.data);
+    await Item.deleteMany();
+    initData.data=initData.data.map((obj)=>({...obj,owner:"6638779c9bfc94fc81a42508"}));
+    await Item.insertMany(initData.data);
     console.log("data was initialized");
 }
 

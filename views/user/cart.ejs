@@ -1,0 +1,57 @@
+<% layout('../layout/boilerplate') -%>
+    
+    
+
+    <table class="table table-primary">
+        <thead class="thead-primary">
+            <tr>
+                <th>Item</th>
+                <th>Price</th>
+                <th>Quantity </th>
+                <th>Rate</th>
+                <th>Delete</th>
+            </tr>
+        </thead>
+        <tbody>
+
+            <% if (order && order.length> 0) { %>
+                <% let sum=0; %>
+                    <% let weight=0; %>
+                        <% order.forEach(orderItem=> { %>
+                            <tr>
+                                <td>
+                                    <%= orderItem.item.title %>
+                                </td>
+                                <td>
+                                    <%= orderItem.item.price %>/<%= orderItem.item.unit %>
+                                </td>
+                                <td>
+                                    <%= orderItem.quantity %> <%= orderItem.item.unit %>
+                                </td>
+                                <td>
+                                    <%= orderItem.quantity * orderItem.item.price %>
+                                </td>
+                                <td>
+                                    <form method="POST" action="/order/delete?_method=DELETE">
+                                        <input type="hidden" name="orderItem" value="<%= orderItem.item._id %>">
+                                        <button class="btn btn-dark" style="width: 80px;">Delete</button>
+                                    </form>
+                                </td>
+                            </tr>
+                                    <% }) %>
+                                        
+                                        <% } else { %>
+                                            <tr>
+                                                <td colspan="5">No items in the cart</td>
+                                            </tr>
+                                            <% } %>
+        </tbody>
+    </table>
+    <% if (order && order.length> 0) { %>
+    <a href="/order/location" style="width: 180px;" class="btn btn-success add-btn ">Add Delivery Location</a>
+    <% } %>
+
+    </div>
+
+   
+
