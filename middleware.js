@@ -1,5 +1,4 @@
-const item =require("./models/item.js")
-const ExpressError = require("./utils/ExpressError.js")
+const ExpressError = require("./utils/ExpressError.js");
 const { itemSchema,reviewSchema, orderSchema } = require("./schema.js");
 const Review = require("./models/review.js");
 const Item = require("./models/item.js");
