@@ -69,7 +69,7 @@
                                 <%=item.title%>
                             </b>
                             <br>
-                            Price: &#8377;<%=item.price.toLocaleString("en-In")%>/<%=item.unit%>
+                            Price: &#8377;<%= item.detail[0].price.toLocaleString("en-In") %>/<%= item.unit %>
                         </p>
                 </a>
             </div>
